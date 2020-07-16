@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import "./App.css";
-import DetailPageUpdate from "./detail-page";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import OverviewPage from "./overview-page";
+import DetailPage from "./pages/detail-page";
+import OverviewPage from "./pages/overview-page";
+import ShoppingCartPage from "./pages/shopping-cart-page";
+import PurchaseHistoryPage from "./pages/purchase-history-page";
 
 function App() {
   return (
@@ -10,7 +12,13 @@ function App() {
       <div className="App">
         <Switch>
           <Route path="/details/:wineID">
-            <DetailPageUpdate />
+            <DetailPage />
+          </Route>
+          <Route path="/shoppingCart">
+            <ShoppingCartPage />
+          </Route>
+          <Route path="/purchaseHistory">
+            <PurchaseHistoryPage />
           </Route>
           <Route path="/">
             <OverviewPage />
