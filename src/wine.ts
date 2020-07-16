@@ -8,6 +8,16 @@ interface Wine {
   description: string;
   price: string;
   imagePath: string;
+  rating?: number;
+  reviews?: Review[];
+}
+
+interface Review {
+  wineId: string;
+  id: string;
+  name: string;
+  rating: number;
+  text: string;
 }
 
 const wine: Wine[] = [

@@ -20,10 +20,10 @@ function OverviewPage() {
     <>
       {wineList.map((wine) => {
         return (
-          <div onClick={navigateToWine(wine.id)}>
+          <Overview onClick={navigateToWine(wine.id)}>
             <img src={wine?.imagePath} alt="" height="200px" />
             <p>{wine.name}</p>
-          </div>
+          </Overview>
         );
       })}
     </>
