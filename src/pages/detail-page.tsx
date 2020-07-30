@@ -4,10 +4,14 @@ import { useParams } from "react-router-dom";
 import wineList from "../wine";
 import ErrorPage from "./error-detail-page";
 import { useHistory } from "react-router-dom";
+import StarRating from "../components/star-rating";
 
-const styledDetailPage = styled.div`
-  display: flex;
-  flex-direction: row;
+const BackButton = styled.button`
+  display: inline-block;
+  border-radius: 3px;
+  padding: 5px;
+  background: black;
+  color: white;
 `;
 
 function DetailPage() {
@@ -27,7 +31,7 @@ function DetailPage() {
   }
   return (
     <>
-      <button onClick={navigateToOverview}>Back To Overview</button>
+      <BackButton onClick={navigateToOverview}>Back To Overview</BackButton>
       <img alt="" src={wine?.imagePath} height="200px" />
       <h1>{wine.name}</h1>
       <p>{wine.year}</p>
@@ -37,6 +41,16 @@ function DetailPage() {
       <br />
       <p>{wine.description}</p>
       <h3>Price per bottle: {wine?.price}</h3>
+      <br />
+      {wine.reviews?.map((review) => {
+        return (
+          <div>
+            <h4>{review.name}</h4>
+            <p>{review.text}</p>
+            <StarRating rating={review.rating} />
+          </div>
+        );
+      })}
     </>
   );
 }
