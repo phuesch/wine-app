@@ -59,7 +59,7 @@ const wine: Wine[] = [
     description:
       "This is an excellent wine for warm summerdays, fresh and light with a sprinkle of strawberrys.",
     price: "13,90€",
-    imagePath: "/pictures/rosado-wine-picture.jpg",
+    imagePath: "/pictures/rosado-wine-picture-new.jpg",
     reviews: [
       {
         wineId: "rosado2019",
