@@ -3,6 +3,20 @@ import styled from "styled-components";
 import { Router, useHistory } from "react-router-dom";
 import wineList from "../wine";
 
+const size = {
+  mobile: "320px",
+  tablet: "760px",
+  laptop: "1024px",
+  desktop: "2560px",
+};
+
+const device = {
+  mobile: `(min-width: ${size.mobile})`,
+  tablet: `(min-width: ${size.tablet})`,
+  laptop: `(min-width: ${size.laptop})`,
+  desktop: `(min-width: ${size.desktop})`,
+};
+
 const PageWrapper = styled.div`
   background-size: cover;
   height: 100vh;
@@ -22,8 +36,36 @@ const WineProductTile = styled.a`
 
 const WineGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  @media ${device.mobile} {
+    grid-template-columns: 1fr;
+  }
+  @media ${device.tablet} {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media ${device.laptop} {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  @media ${device.desktop} {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
 `;
+
+/* const WineGrid = styled.div`
+  display: grid;
+  @media (min-device-width: 320px) {
+    grid-template-columns: 1fr;
+  }
+  @media (min-device-width: 760px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (min-device-width: 1024px) {
+    grid-template-colums: 1fr 1fr 1fr;
+  }
+  @media (min-device-width: 2560px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+`;
+*/
 
 const StyledOverviewWineDetails = styled.div`
   display: flex;
@@ -48,7 +90,7 @@ function OverviewPage() {
                 onClick={navigateToWine(wine.id)}
                 href={"/details/" + wine.id}
               >
-                <img src={wine?.imagePath} alt="" height="300px" />
+                <img src={wine?.imagePath} alt="" height="200px" />
                 <StyledOverviewWineDetails>
                   <h2>{wine.name}</h2>
                   <p>{wine.description}</p>
