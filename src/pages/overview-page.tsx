@@ -3,20 +3,6 @@ import styled from "styled-components";
 import { Router, useHistory } from "react-router-dom";
 import wineList from "../wine";
 
-const size = {
-  mobile: "320px",
-  tablet: "760px",
-  laptop: "1024px",
-  desktop: "2560px",
-};
-
-const device = {
-  mobile: `(min-width: ${size.mobile})`,
-  tablet: `(min-width: ${size.tablet})`,
-  laptop: `(min-width: ${size.laptop})`,
-  desktop: `(min-width: ${size.desktop})`,
-};
-
 const PageWrapper = styled.div`
   background-size: cover;
   height: 100vh;
@@ -36,16 +22,16 @@ const WineProductTile = styled.a`
 
 const WineGrid = styled.div`
   display: grid;
-  @media ${device.mobile} {
+  @media ${(props) => props.theme.mediaQueries.mobile} {
     grid-template-columns: 1fr;
   }
-  @media ${device.tablet} {
+  @media ${(props) => props.theme.mediaQueries.tablet} {
     grid-template-columns: 1fr 1fr;
   }
-  @media ${device.laptop} {
+  @media ${(props) => props.theme.mediaQueries.laptop} {
     grid-template-columns: 1fr 1fr 1fr;
   }
-  @media ${device.desktop} {
+  @media ${(props) => props.theme.mediaQueries.desktop} {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 `;
