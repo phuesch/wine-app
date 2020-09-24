@@ -12,8 +12,14 @@ const mediaQueries = {
   desktop: `(min-width: ${size.desktop})`,
 };
 
+const mainWrapper = {
+  fontFamily: "MADE Bon Voyage",
+  backgroundImage: 'url("/pictures/background-image.jpg")',
+};
+
 const theme = {
   mediaQueries,
+  mainWrapper,
 };
 
 export default theme;

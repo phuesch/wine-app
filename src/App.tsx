@@ -11,8 +11,8 @@ import Footer from "./components/footer";
 import theme from "./theme";
 
 const MainWrapper = styled.div`
-  font-family: MADE Bon Voyage;
-  background-image: url("/pictures/background-image.jpg");
+  font-family: ${(props) => props.theme.mainWrapper.fontFamily};
+  background-image: ${(props) => props.theme.mainWrapper.backgroundImage};
 `;
 
 function App() {
