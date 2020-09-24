@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Router, useHistory } from "react-router-dom";
-import wineList from "../wine";
+import { Wine } from "../wine";
 
 const PageWrapper = styled.div`
   background-size: cover;
@@ -61,6 +61,17 @@ const StyledOverviewWineDetails = styled.div`
 
 function OverviewPage() {
   const history = useHistory();
+  const [wineList, setWineList] = useState<Wine[]>([]);
+  useEffect(() => {
+    fetch("http://localhost:4000/wine/")
+      .then((response) => {
+        console.log(response.status);
+        return response.json();
+      })
+      .then((wine) => {
+        setWineList(wine);
+      });
+  }, []);
 
   function navigateToWine(wineID: string) {
     return () => history.push("/details/" + wineID);
@@ -75,6 +86,7 @@ function OverviewPage() {
               <WineProductTile
                 onClick={navigateToWine(wine.id)}
                 href={"/details/" + wine.id}
+                key={wine.id}
               >
                 <img src={wine?.imagePath} alt="" height="200px" />
                 <StyledOverviewWineDetails>

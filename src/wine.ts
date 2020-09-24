@@ -1,4 +1,4 @@
-interface Wine {
+export interface Wine {
   id: string;
   name: string;
   year: number;
@@ -12,7 +12,7 @@ interface Wine {
   reviews?: Review[];
 }
 
-interface Review {
+export interface Review {
   wineId: string;
   id: string;
   name: string;
