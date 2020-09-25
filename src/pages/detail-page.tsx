@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
-import wineList from "../wine";
+import Wine from "../wine";
 import ErrorPage from "./error-detail-page";
 import { useHistory } from "react-router-dom";
 import StarRating from "../components/star-rating";
+import LoadingSpinner from "../components/loadingSpinner";
 
 const HeroGrid = styled.div`
   display: grid;
@@ -37,41 +38,52 @@ const BackButton = styled.button`
 `;
 
 function DetailPage() {
-  //const [details, setDetails] = useState();
   const parameter = useParams<{ wineID: string }>();
-  const wine = wineList.find((wine) => {
-    return wine.id === parameter.wineID;
-  });
+  const [loading, setLoading] = useState(false);
+  const [wineDetails, setWineDetails] = useState<Wine>();
+  useEffect(() => {
+    setLoading(true);
+    fetch("http://localhost:4000/wine/" + parameter.wineID)
+      .then((response) => {
+        return response.json();
+      })
+      .then((wineDetail) => {
+        setWineDetails(wineDetail);
+        setLoading(false);
+      });
+  }, []);
 
   const history = useHistory();
   function navigateToOverview() {
     history.push("/");
   }
 
-  if (!wine) {
+  if (loading) {
+    return <LoadingSpinner />;
+  } else if (!wineDetails) {
     return <ErrorPage />;
   }
   return (
     <>
       <BackButton onClick={navigateToOverview}>Back To Overview</BackButton>
       <HeroGrid>
-        <img alt="" src={wine?.imagePath} height="400px" />
+        <img alt="" src={wineDetails?.imagePath} height="400px" />
         <HeroText>
           <div>
-            <h1>{wine.name}</h1>
-            <p>{wine.year}</p>
-            <p>{wine.type}</p>
-            <p>{wine.specialties}</p>
-            <p>Vol: {wine.vol}%</p>
-            <h3>Price per bottle: {wine?.price}</h3>
+            <h1>{wineDetails.name}</h1>
+            <p>{wineDetails.year}</p>
+            <p>{wineDetails.type}</p>
+            <p>{wineDetails.specialties}</p>
+            <p>Vol: {wineDetails.vol}%</p>
+            <h3>Price per bottle: {wineDetails?.price}</h3>
           </div>
         </HeroText>
       </HeroGrid>
       <Description>
-        <p>{wine.description}</p>
+        <p>{wineDetails.description}</p>
       </Description>
       <Review>
-        {wine.reviews?.map((review) => {
+        {wineDetails.reviews?.map((review) => {
           return (
             <div>
               <h4>{review.name}</h4>

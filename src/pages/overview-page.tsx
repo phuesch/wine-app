@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Router, useHistory } from "react-router-dom";
-import { Wine } from "../wine";
+import Wine from "../wine";
 
 const PageWrapper = styled.div`
   background-size: cover;
@@ -65,7 +65,6 @@ function OverviewPage() {
   useEffect(() => {
     fetch("http://localhost:4000/wine/")
       .then((response) => {
-        console.log(response.status);
         return response.json();
       })
       .then((wine) => {
