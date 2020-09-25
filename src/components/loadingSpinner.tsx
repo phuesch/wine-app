@@ -1,6 +1,5 @@
 import BarLoader from "react-spinners/BarLoader";
 import React from "react";
-import { css } from "@emotion/core";
 import styled from "styled-components";
 
 const StyledLoader = styled.div`

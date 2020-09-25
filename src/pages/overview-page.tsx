@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Router, useHistory } from "react-router-dom";
 import Wine from "../wine";
+import LoadingSpinner from "../components/loadingSpinner";
 
 const PageWrapper = styled.div`
   background-size: cover;
@@ -61,14 +62,17 @@ const StyledOverviewWineDetails = styled.div`
 
 function OverviewPage() {
   const history = useHistory();
+  const [loading, setLoading] = useState(false);
   const [wineList, setWineList] = useState<Wine[]>([]);
   useEffect(() => {
+    setLoading(true);
     fetch("http://localhost:4000/wine/")
       .then((response) => {
         return response.json();
       })
       .then((wine) => {
         setWineList(wine);
+        setLoading(false);
       });
   }, []);
 
@@ -76,6 +80,9 @@ function OverviewPage() {
     return () => history.push("/details/" + wineID);
   }
 
+  if (loading) {
+    return <LoadingSpinner />;
+  }
   return (
     <>
       <PageWrapper>
