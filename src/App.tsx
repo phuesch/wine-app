@@ -13,6 +13,8 @@ import theme from "./theme";
 const MainWrapper = styled.div`
   font-family: ${(props) => props.theme.mainWrapper.fontFamily};
   background-image: ${(props) => props.theme.mainWrapper.backgroundImage};
+  background-position: center;
+  background-size: cover;
 `;
 
 function App() {
