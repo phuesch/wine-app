@@ -9,7 +9,7 @@ import LoadingSpinner from "../components/loadingSpinner";
 
 const HeroGrid = styled.div`
   display: grid;
-  grid-template-columns: 2fr 3fr;
+  grid-template-columns: 1fr 1fr;
 `;
 
 const HeroText = styled.div`
@@ -76,7 +76,7 @@ function DetailPage() {
     <>
       <BackButton onClick={navigateToOverview}>Back To Overview</BackButton>
       <HeroGrid>
-        <img alt="" src={wineDetails?.imagePath} height="400px" />
+        <img alt="" src={wineDetails?.imagePath} height="400px" width="100%" />
         <HeroText>
           <div>
             <h1>{wineDetails.name}</h1>

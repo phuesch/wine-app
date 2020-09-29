@@ -6,13 +6,14 @@ import LoadingSpinner from "../components/loadingSpinner";
 
 const PageWrapper = styled.div`
   background-size: cover;
-  height: 100vh;
+  height: 70vh;
   margin: 20px;
 `;
 
 const WineProductTile = styled.a`
   text-decoration: none;
   color: black;
+  padding: 20px 0;
   transition: transform 1s;
 
   :hover {
@@ -58,6 +59,7 @@ const StyledOverviewWineDetails = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0 20px;
 `;
 
 function OverviewPage() {
