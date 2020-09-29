@@ -5,11 +5,14 @@ import theme from "../theme";
 const StyledHeader = styled.div`
   display: grid;
   background-color: #d2d6c5;
-  @media ${(props) => theme.mediaQueries.tablet} {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-  @media ${(props) => theme.mediaQueries.mobile} {
-    grid-template-areas: 2 1 3;
+  /* grid-template-columns: 1fr 1fr 1fr; */
+  grid-template-areas:
+    "title title"
+    "leftMenuItems rightMenuItems";
+
+  @media ${(props) => theme.mediaQueries.laptop} {
+    grid-template-areas: "leftMenuItems title rightMenuItems";
+    /* grid-template-areas: 2 1 3;
     grid-template-columns: 1fr 1fr;
 
     .firstItem {
@@ -25,6 +28,10 @@ const StyledHeader = styled.div`
       order: 2;
     }
   }
+  /* @media ${(props) => theme.mediaQueries.tablet} {
+    grid-template-columns: 1fr 1fr 1fr;
+  }  */
+  }
 `;
 
 const StyledTitle = styled.a`
@@ -33,26 +40,32 @@ const StyledTitle = styled.a`
   display: flex;
   align-items: center;
   justify-content: center;
+  grid-area: title;
 `;
 
-const MenuItemWrapper = styled.div`
+interface MenuItemWrapperProps {
+  gridArea: "leftMenuItems" | "rightMenuItems";
+}
+
+const MenuItemWrapper = styled.div<MenuItemWrapperProps>`
   display: flex;
   justify-content: space-evenly;
   flex-direction: row;
   align-items: center;
+  grid-area: ${(props) => props.gridArea};
 `;
 
-const Header: FC = (props) => {
+const Header: FC = () => {
   return (
     <StyledHeader>
-      <MenuItemWrapper className="firstItem">
+      <MenuItemWrapper gridArea="leftMenuItems">
         <p>Wine</p>
         <p>Sale</p>
       </MenuItemWrapper>
-      <StyledTitle href="/" className="secondItem">
+      <StyledTitle href="/">
         <h1>World Of Wine</h1>
       </StyledTitle>
-      <MenuItemWrapper className="thirdItem">
+      <MenuItemWrapper gridArea="rightMenuItems">
         <p>Types of grape</p>
         <p>Fits with..</p>
       </MenuItemWrapper>
