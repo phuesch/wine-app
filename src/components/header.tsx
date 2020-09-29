@@ -4,6 +4,7 @@ import theme from "../theme";
 
 const StyledHeader = styled.div`
   display: grid;
+  background-color: #d2d6c5;
   @media ${(props) => theme.mediaQueries.tablet} {
     grid-template-columns: 1fr 1fr 1fr;
   }
