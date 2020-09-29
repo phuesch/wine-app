@@ -22,11 +22,20 @@ const HeroText = styled.div`
 const Description = styled.p`
   max-width: 650px;
   margin: 0 auto;
+  padding: 100px;
+  font-size: 25px;
+`;
+
+const ReviewGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 `;
 
 const Review = styled.div`
-  max-width: 650px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 30px;
 `;
 
 const BackButton = styled.button`
@@ -71,29 +80,49 @@ function DetailPage() {
         <HeroText>
           <div>
             <h1>{wineDetails.name}</h1>
-            <p>{wineDetails.year}</p>
-            <p>{wineDetails.type}</p>
-            <p>{wineDetails.specialties}</p>
+            <h3>{wineDetails.year}</h3>
+            <h3>{wineDetails.type}</h3>
+            <h3>{wineDetails.specialties}</h3>
             <p>Vol: {wineDetails.vol}%</p>
-            <h3>Price per bottle: {wineDetails?.price}</h3>
+            <h2>Price per bottle: {wineDetails?.price}</h2>
           </div>
         </HeroText>
       </HeroGrid>
       <Description>
         <p>{wineDetails.description}</p>
       </Description>
-      <Review>
-        {wineDetails.reviews?.map((review) => {
-          return (
-            <div>
+      <ReviewGrid>
+        {wineDetails.reviews?.map((review, reviewIndex) => {
+          const image = (
+            <img
+              src={wineDetails.reviewPictures?.[reviewIndex].imagePath}
+              height="400px"
+              width="100%"
+            />
+          );
+          const reviewComponent = (
+            <Review>
               <h4>{review.name}</h4>
               <p>{review.text}</p>
-              <StarRating rating={review.rating} />
+              <div>
+                <StarRating rating={review.rating} />
+              </div>
               <p>{review.rating}</p>
-            </div>
+            </Review>
+          );
+          return reviewIndex % 2 ? (
+            <>
+              {reviewComponent}
+              {image}
+            </>
+          ) : (
+            <>
+              {image}
+              {reviewComponent}
+            </>
           );
         })}
-      </Review>
+      </ReviewGrid>
     </>
   );
 }

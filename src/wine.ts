@@ -10,6 +10,7 @@ interface Wine {
   imagePath: string;
   rating?: number;
   reviews?: Review[];
+  reviewPictures?: ReviewPictures[];
 }
 
 export interface Review {
@@ -18,6 +19,10 @@ export interface Review {
   name: string;
   rating: number;
   text: string;
+}
+
+export interface ReviewPictures {
+  imagePath: string;
 }
 
 export default Wine;
