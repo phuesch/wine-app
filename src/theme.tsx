@@ -14,7 +14,7 @@ const mediaQueries = {
 
 const mainWrapper = {
   fontFamily: "MADE Bon Voyage",
-  backgroundImage: 'url("/pictures/background-image.png")',
+  backgroundImage: 'url("/pictures/background-image.jpg")',
 };
 
 const theme = {

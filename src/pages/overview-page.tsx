@@ -15,6 +15,7 @@ const WineProductTile = styled.a`
   color: black;
   padding: 20px 0;
   transition: transform 1s;
+  margin: 30px;
 
   :hover {
     transform: scale(1.15);

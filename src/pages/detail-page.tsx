@@ -3,13 +3,17 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import Wine from "../wine";
 import ErrorPage from "./error-detail-page";
-import { useHistory } from "react-router-dom";
 import StarRating from "../components/star-rating";
 import LoadingSpinner from "../components/loadingSpinner";
+import BackToOverviewButton from "../components/backButton";
 
 const HeroGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
+`;
+
+const HeroImage = styled.div`
+  background-color: #eef0ec;
 `;
 
 const HeroText = styled.div`
@@ -38,14 +42,6 @@ const Review = styled.div`
   padding: 30px;
 `;
 
-const BackButton = styled.button`
-  display: inline-block;
-  border-radius: 3px;
-  padding: 5px;
-  background: black;
-  color: white;
-`;
-
 function DetailPage() {
   const parameter = useParams<{ wineID: string }>();
   const [loading, setLoading] = useState(false);
@@ -62,11 +58,6 @@ function DetailPage() {
       });
   }, []);
 
-  const history = useHistory();
-  function navigateToOverview() {
-    history.push("/");
-  }
-
   if (loading) {
     return <LoadingSpinner />;
   } else if (!wineDetails) {
@@ -74,9 +65,16 @@ function DetailPage() {
   }
   return (
     <>
-      <BackButton onClick={navigateToOverview}>Back To Overview</BackButton>
+      {/* <BackToOverviewButton>Back To Overview</BackToOverviewButton> */}
       <HeroGrid>
-        <img alt="" src={wineDetails?.imagePath} height="400px" width="100%" />
+        <HeroImage>
+          <img
+            alt=""
+            src={wineDetails?.imagePath}
+            height="400px"
+            width="100%"
+          />
+        </HeroImage>
         <HeroText>
           <div>
             <h1>{wineDetails.name}</h1>

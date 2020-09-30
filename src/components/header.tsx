@@ -4,8 +4,7 @@ import theme from "../theme";
 
 const StyledHeader = styled.div`
   display: grid;
-  background-color: #d2d6c5;
-  /* grid-template-columns: 1fr 1fr 1fr; */
+  background-color: #c9d7ca;
   grid-template-areas:
     "title title"
     "leftMenuItems rightMenuItems";
@@ -60,14 +59,14 @@ const Header: FC = () => {
     <StyledHeader>
       <MenuItemWrapper gridArea="leftMenuItems">
         <p>Wine</p>
-        <p>Sale</p>
+        <p>Types of grape</p>
       </MenuItemWrapper>
       <StyledTitle href="/">
         <h1>World Of Wine</h1>
       </StyledTitle>
       <MenuItemWrapper gridArea="rightMenuItems">
-        <p>Types of grape</p>
         <p>Fits with..</p>
+        <p>Sale</p>
       </MenuItemWrapper>
     </StyledHeader>
   );
