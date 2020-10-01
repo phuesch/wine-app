@@ -22,6 +22,7 @@ const Contact = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  padding: 20px 0 0 0;
 `;
 
 function thisYear() {

@@ -42,6 +42,16 @@ const StyledTitle = styled.a`
   grid-area: title;
 `;
 
+const MenuItem = styled.a`
+  text-decoration: none;
+  color: black;
+  transition: transform 0.5s;
+
+  :hover {
+    transform: scale(1.3);
+  }
+`;
+
 interface MenuItemWrapperProps {
   gridArea: "leftMenuItems" | "rightMenuItems";
 }
@@ -58,7 +68,7 @@ const Header: FC = () => {
   return (
     <StyledHeader>
       <MenuItemWrapper gridArea="leftMenuItems">
-        <p>Wine</p>
+        <MenuItem href="/">Wine</MenuItem>
         <p>Types of grape</p>
       </MenuItemWrapper>
       <StyledTitle href="/">

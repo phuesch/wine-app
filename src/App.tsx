@@ -15,6 +15,7 @@ const MainWrapper = styled.div`
   background-image: ${(props) => props.theme.mainWrapper.backgroundImage};
   background-position: center;
   background-size: cover;
+  background-attachment: fixed;
 `;
 
 function App() {

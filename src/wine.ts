@@ -11,6 +11,7 @@ interface Wine {
   rating?: number;
   reviews?: Review[];
   reviewPictures?: ReviewPictures[];
+  productImage: string;
 }
 
 export interface Review {

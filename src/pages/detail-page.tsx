@@ -1,19 +1,28 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import Wine from "../wine";
 import ErrorPage from "./error-detail-page";
 import StarRating from "../components/star-rating";
 import LoadingSpinner from "../components/loadingSpinner";
-import BackToOverviewButton from "../components/backButton";
 
 const HeroGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 2fr 3fr;
+  overflow: hidden;
 `;
 
-const HeroImage = styled.div`
-  background-color: #eef0ec;
+const HeroButton = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const HeroImage = styled.div<{ imagePath: string }>`
+  background-image: url(${(props) => props.imagePath});
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
 `;
 
 const HeroText = styled.div`
@@ -21,13 +30,17 @@ const HeroText = styled.div`
   align-items: center;
   flex-direction: column;
   justify-content: center;
+  padding: 200px;
+`;
+
+const DescriptionWrapper = styled.div`
+  background: rgba(243, 244, 239, 0.75);
+  padding: 150px;
 `;
 
 const Description = styled.p`
-  max-width: 650px;
-  margin: 0 auto;
-  padding: 100px;
   font-size: 25px;
+  text-align: center;
 `;
 
 const ReviewGrid = styled.div`
@@ -42,10 +55,20 @@ const Review = styled.div`
   padding: 30px;
 `;
 
+const BackButton = styled.button`
+  display: inline-block;
+  background: black;
+  color: white;
+`;
+
 function DetailPage() {
   const parameter = useParams<{ wineID: string }>();
   const [loading, setLoading] = useState(false);
   const [wineDetails, setWineDetails] = useState<Wine>();
+  const history = useHistory();
+  function navigateToOverview() {
+    history.push("/");
+  }
   useEffect(() => {
     setLoading(true);
     fetch("http://localhost:4000/wine/" + parameter.wineID)
@@ -65,30 +88,34 @@ function DetailPage() {
   }
   return (
     <>
-      {/* <BackToOverviewButton>Back To Overview</BackToOverviewButton> */}
       <HeroGrid>
-        <HeroImage>
-          <img
-            alt=""
-            src={wineDetails?.imagePath}
-            height="400px"
-            width="100%"
-          />
-        </HeroImage>
-        <HeroText>
-          <div>
-            <h1>{wineDetails.name}</h1>
-            <h3>{wineDetails.year}</h3>
-            <h3>{wineDetails.type}</h3>
-            <h3>{wineDetails.specialties}</h3>
-            <p>Vol: {wineDetails.vol}%</p>
-            <h2>Price per bottle: {wineDetails?.price}</h2>
-          </div>
-        </HeroText>
+        <div>
+          <HeroImage imagePath={wineDetails.productImage} />
+        </div>
+        <div>
+          <HeroButton>
+            <BackButton onClick={navigateToOverview}>
+              Back To Overview
+            </BackButton>
+          </HeroButton>
+          <HeroText>
+            <div>
+              <img src={wineDetails?.imagePath} height="200px" />
+              <h1>{wineDetails.name}</h1>
+              <p>{wineDetails.year}</p>
+              <h3>{wineDetails.type}</h3>
+              <h4>{wineDetails.specialties}</h4>
+              <p>Vol: {wineDetails.vol}%</p>
+              <p>Price per bottle: {wineDetails?.price}</p>
+            </div>
+          </HeroText>
+        </div>
       </HeroGrid>
-      <Description>
-        <p>{wineDetails.description}</p>
-      </Description>
+      <DescriptionWrapper>
+        <Description>
+          <p>{wineDetails.description}</p>
+        </Description>
+      </DescriptionWrapper>
       <ReviewGrid>
         {wineDetails.reviews?.map((review, reviewIndex) => {
           const image = (
@@ -110,13 +137,13 @@ function DetailPage() {
           );
           return reviewIndex % 2 ? (
             <>
-              {reviewComponent}
               {image}
+              {reviewComponent}
             </>
           ) : (
             <>
-              {image}
               {reviewComponent}
+              {image}
             </>
           );
         })}
